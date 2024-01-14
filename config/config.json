@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "",
-    "database": "dumb_merch",
+    "password": null,
+    "database": "waystodo",
     "host": "127.0.0.1",
     "port": "3306",
     "dialect": "mysql"

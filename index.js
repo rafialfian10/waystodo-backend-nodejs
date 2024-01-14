@@ -1,15 +1,42 @@
 const express = require("express");
-const router = require('./src/routes')
+const morgan = require("morgan");
 
-const app = express()
-const port = 5000;
+require("dotenv").config(); // read environment variable from .env file
 
-app.use(express.json())
+// create instance of express
+const app = express();
 
-// Add endpoint grouping and router
-app.use('/api/v1/', router)
-app.listen(port, () => console.log(`Listening on port ${port}!`))
+// create logger instance
+const logger = morgan("dev");
+app.use(logger);
 
-// npx sequelize init
-// npx sequelize-cli migration:generate --name create_user
-// npx sequelize db:migrate
+// incoming request parser
+app.use(express.json());
+
+// get port from environment variable, if not exist then use default port 5000
+const port = process.env.PORT || 5000;
+
+// get router
+const router = require("./src/routes");
+// create router group
+app.use("/api/v1/", router);
+
+// run server
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+
+/* migration database
+
+1. npm install sequelize
+2. npm install sequelize-cli
+3. npm install mysql2
+4. npx sequelize init -> create config.json in folder config & index.js in folder models 
+5. npx sequelize-cli migration:generate --name apa_saja -> edit new file in migrations
+6. npx sequelize db:migrate
+
+// how to view username & password mysql: xampp -> phpmyadmin -> config.inc.php
+// how to view port in mysql: SQL -> create SHOW VARIABLES WHERE Variable_name = 'port';
+
+*/
