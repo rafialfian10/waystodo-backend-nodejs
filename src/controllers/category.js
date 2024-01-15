@@ -1,6 +1,6 @@
 const status = require("http-status");
-const db = require("../database/connection");
 const joi = require("joi");
+const db = require("../database/connection");
 
 const { Category } = require("../../models");
 // ----------------------------------------------
@@ -39,7 +39,7 @@ exports.getCategory = async (req, res) => {
     if (!categoryId) {
       return res
         .status(status.NOT_FOUND)
-        .json({ message: "Category not found" });
+        .json({ message: "category not found" });
     }
 
     const category = await Category.findOne({
@@ -153,7 +153,7 @@ exports.deleteCategory = async (req, res) => {
     if (!category) {
       return res
         .status(status.NOT_FOUND)
-        .json({ message: "Category not found" });
+        .json({ message: "category not found" });
     }
 
     await Category.destroy({
@@ -165,7 +165,7 @@ exports.deleteCategory = async (req, res) => {
 
     res
       .status(status.OK)
-      .json({ message: "Category with id " + req.params.id + " was deleted" });
+      .json({ message: "category with id " + req.params.id + " was deleted" });
   } catch (err) {
     res.status(status.INTERNAL_SERVER_ERROR).json({ message: err.message });
   }

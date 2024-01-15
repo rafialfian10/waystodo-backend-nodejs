@@ -13,14 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       //   foreignKey: "userId",
       //   as: "user", // untuk object key ketika mempreload user di data category
       // });
-      // Category.hasMany(models.Todo, {
-      //   foreignKey: "categoryId",
-      //   as: {
-      //     // untuk object key ketika mempreload todo di data category
-      //     singular: "todo",
-      //     plural: "todos",
-      //   },
-      // });
+      Category.hasMany(models.Todo, {
+        foreignKey: "categoryId",
+        as: {
+          // untuk object key ketika mempreload todo di data category
+          singular: "todo",
+          plural: "todos",
+        },
+      });
     }
   }
   Category.init(

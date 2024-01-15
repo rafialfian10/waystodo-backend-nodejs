@@ -1,0 +1,9 @@
+// sequelize migration configuration -> type nul > .sequelizerc
+const path = require('path');
+
+module.exports = {
+  config: path.resolve('path/to/config', 'config.json'), // Sesuaikan dengan lokasi file konfigurasi database Anda
+  'models-path': path.resolve('path/to/models'), // Sesuaikan dengan lokasi model Sequelize Anda
+  'seeders-path': path.resolve('path/to/seeders'), // Sesuaikan dengan lokasi seeders Sequelize Anda
+  'migrations-path': path.resolve('path/to/migrations'), // Sesuaikan dengan lokasi migrations Sequelize Anda
+};
