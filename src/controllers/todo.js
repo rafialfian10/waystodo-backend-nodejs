@@ -2,6 +2,7 @@ const status = require("http-status");
 const joi = require("joi");
 
 const { Todo, Category } = require("../../models");
+// ------------------------------------------------
 
 exports.getTodos = async (req, res) => {
   try {
@@ -91,9 +92,8 @@ exports.createTodo = async (req, res) => {
       throw error;
     }
 
-    // insert into database
     let todo = await Todo.create({
-      //   userId: req.userData.id,
+      // userId: req.userData.id,
       categoryId: req.body.category_id,
       title: req.body.title,
       description: req.body.description,
@@ -134,7 +134,6 @@ exports.createTodo = async (req, res) => {
 };
 
 exports.updateTodo = async (req, res) => {
-  console.log("request", req);
   try {
     let todo = await Todo.findOne({
       where: {
@@ -142,6 +141,10 @@ exports.updateTodo = async (req, res) => {
         id: req.params.id,
       },
     });
+
+    if (!todo) {
+      throw new Error("todo not found");
+    }
 
     if (req.body.category_id) {
       todo.categoryId = req.body.category_id;

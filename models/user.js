@@ -10,22 +10,22 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // User.hasMany(models.Todo, {
-      //   foreignKey: "userId",
-      //   as: {
-      //     // untuk object key ketika mempreload todo di data user
-      //     singular: "todo",
-      //     plural: "todos",
-      //   },
-      // });
-      // User.hasMany(models.Category, {
-      //   foreignKey: "userId",
-      //   as: {
-      //     // untuk object key ketika mempreload category di data user
-      //     singular: "category",
-      //     plural: "categories",
-      //   },
-      // });
+      User.hasMany(models.Todo, {
+        foreignKey: "userId",
+        as: {
+          // untuk object key ketika mempreload todo di data user
+          singular: "todo",
+          plural: "todos",
+        },
+      });
+      User.hasMany(models.Category, {
+        foreignKey: "userId",
+        as: {
+          // untuk object key ketika mempreload category di data user
+          singular: "category",
+          plural: "categories",
+        },
+      });
     }
   }
   User.init(
@@ -33,19 +33,24 @@ module.exports = (sequelize, DataTypes) => {
       userName: {
         type: DataTypes.STRING,
       },
-      email: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+      },
       password: {
         type: DataTypes.STRING,
         set(value) {
           this.setDataValue("password", bcrypt.hashSync(value, 10));
         },
       },
-      phone: DataTypes.STRING,
-      photo: DataTypes.STRING,
+      phone: {
+        type: DataTypes.STRING,
+      },
+      photo: {
+        type: DataTypes.STRING,
+      },
       isEmailVerified: {
         type: DataTypes.BOOLEAN,
       },
-     
     },
     {
       sequelize,

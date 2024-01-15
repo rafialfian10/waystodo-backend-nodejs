@@ -34,7 +34,6 @@ exports.getCategory = async (req, res) => {
     //   replacements: [id],
     // });
 
-    // Check if the category exists
     const categoryId = await Category.findByPk(id);
     if (!categoryId) {
       return res
@@ -51,7 +50,6 @@ exports.getCategory = async (req, res) => {
       },
     });
 
-    // send to response
     res.status(status.OK).json(category);
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
@@ -72,7 +70,6 @@ exports.createCategory = async (req, res) => {
       return res.status(status.BAD_REQUEST).json({ message: error.message });
     }
 
-    // insert into database
     let category = await Category.create({
       categoryName: req.body.category_name,
       bgColor: req.body.bg_color,
@@ -95,7 +92,6 @@ exports.createCategory = async (req, res) => {
 
 exports.updateCategory = async (req, res) => {
   try {
-    // get category by id
     let category = await Category.findOne({
       where: {
         id: req.params.id,
@@ -122,7 +118,6 @@ exports.updateCategory = async (req, res) => {
       }
     );
 
-    // get category by id after updating
     category = await Category.findOne({
       where: {
         id: req.params.id,
@@ -148,7 +143,6 @@ exports.deleteCategory = async (req, res) => {
   try {
     const categoryId = req.params.id;
 
-    // Check if the category exists
     const category = await Category.findByPk(categoryId);
     if (!category) {
       return res
