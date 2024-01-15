@@ -10,13 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Todo.belongsTo(models.User, {
-      //   foreignKey: "userId",
-      //   as: "user", // untuk object key ketika mempreload user di data todo
-      // });
+      Todo.belongsTo(models.User, {
+        foreignKey: "userId",
+        as: "user", // untuk object key ketika mempreload user di data todo
+      });
       Todo.belongsTo(models.Category, {
         foreignKey: "categoryId",
-        as: "category",
+        as: "category", // untuk object key ketika mempreload category di data todo
       });
     }
   }

@@ -18,14 +18,14 @@ module.exports = (sequelize, DataTypes) => {
           plural: "todos",
         },
       });
-      User.hasMany(models.Category, {
-        foreignKey: "userId",
-        as: {
-          // untuk object key ketika mempreload category di data user
-          singular: "category",
-          plural: "categories",
-        },
-      });
+      // User.hasMany(models.Category, {
+      //   foreignKey: "userId",
+      //   as: {
+      //     // untuk object key ketika mempreload category di data user
+      //     singular: "category",
+      //     plural: "categories",
+      //   },
+      // });
     }
   }
   User.init(

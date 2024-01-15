@@ -1,13 +1,18 @@
 const {
-  getTodos, getTodo, createTodo, updateTodo, deleteTodo,
+  getTodos,
+  getTodo,
+  createTodo,
+  updateTodo,
+  deleteTodo,
 } = require("../controllers/todo");
+const { userAuth } = require("../middleware/userAuth");
 
 const todo = (router) => {
-  router.get("/todos", getTodos);
-  router.get("/todo/:id", getTodo);
-  router.post("/todo", createTodo);
-  router.patch("/todo/:id", updateTodo);
-  router.delete("/todo/:id", deleteTodo);
+  router.get("/todos", userAuth, getTodos);
+  router.get("/todo/:id", userAuth, getTodo);
+  router.post("/todo", userAuth, createTodo);
+  router.patch("/todo/:id", userAuth, updateTodo);
+  router.delete("/todo/:id", userAuth, deleteTodo);
 };
 
 module.exports = todo;

@@ -5,7 +5,6 @@ const {
   updateCategory,
   deleteCategory,
 } = require("../controllers/category");
-
 const { userAuth } = require("../middleware/userAuth");
 
 const category = (router) => {

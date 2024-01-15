@@ -95,8 +95,30 @@ exports.getUsers = async (req, res) => {
   try {
     const users = await User.findAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "password"],
       },
+      include: [
+        {
+          model: Todo,
+          as: "todos",
+          attributes: {
+            exclude: [
+              "createdAt",
+              "updatedAt",
+              "deletedAt",
+              "userId",
+              "categoryId",
+            ],
+          },
+        },
+        // {
+        //   model: Category,
+        //   as: "categories",
+        //   attributes: {
+        //     exclude: ["createdAt", "updatedAt", "password", "deletedAt"],
+        //   },
+        // },
+      ],
     });
 
     res.status(status.OK).json(users);
@@ -118,12 +140,21 @@ exports.getUser = async (req, res) => {
       where: {
         id,
       },
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "deletedAt", "password"],
+      },
       include: [
         {
           model: Todo,
           as: "todos",
           attributes: {
-            exclude: ["createdAt", "updatedAt", "deletedAt"],
+            exclude: [
+              "createdAt",
+              "updatedAt",
+              "deletedAt",
+              "userId",
+              "categoryId",
+            ],
           },
         },
         // {
@@ -134,9 +165,6 @@ exports.getUser = async (req, res) => {
         //   },
         // },
       ],
-      attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
-      },
     });
 
     res.status(status.OK).json(user);
@@ -180,7 +208,7 @@ exports.updateUser = async (req, res) => {
         id: req.params.id,
       },
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "password"],
       },
     });
 
