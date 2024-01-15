@@ -1,9 +1,11 @@
 // sequelize migration configuration -> type nul > .sequelizerc
-const path = require('path');
+// const path = require('path');
 
-module.exports = {
-  config: path.resolve('path/to/config', 'config.json'), // Sesuaikan dengan lokasi file konfigurasi database Anda
-  'models-path': path.resolve('path/to/models'), // Sesuaikan dengan lokasi model Sequelize Anda
-  'seeders-path': path.resolve('path/to/seeders'), // Sesuaikan dengan lokasi seeders Sequelize Anda
-  'migrations-path': path.resolve('path/to/migrations'), // Sesuaikan dengan lokasi migrations Sequelize Anda
-};
+// module.exports = {
+//   config: path.resolve('path/to/config', 'config.json'), // Sesuaikan dengan lokasi file konfigurasi database Anda
+//   'models-path': path.resolve('path/to/models'), // Sesuaikan dengan lokasi model Sequelize Anda
+//   'seeders-path': path.resolve('path/to/seeders'), // Sesuaikan dengan lokasi seeders Sequelize Anda
+//   'migrations-path': path.resolve('path/to/migrations'), // Sesuaikan dengan lokasi migrations Sequelize Anda
+// };
+
+// .sequelizerc ini akan digunakan oleh Sequelize ketika Anda menjalankan perintah-perintah seperti sequelize init, sequelize model:generate, dan sebagainya. File ini memungkinkan Anda mengonfigurasi lokasi file konfigurasi, model, seeders, dan migrations yang digunakan oleh Sequelize dalam proyek Node.js Anda.

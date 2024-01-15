@@ -6,38 +6,26 @@ const { Todo, Category } = require("../../models");
 exports.getTodos = async (req, res) => {
   try {
     const todos = await Todo.findAll({
-      // where: {
-      //   userId: req.userData.id,
-      // },
       include: [
         {
           model: Category,
           as: "category",
           attributes: {
-            exclude: ["createdAt", "updatedAt", "deletedAt"],
+            exclude: ["createdAt", "updatedAt", "password"],
           },
         },
-        //   {
-        //     model: User,
-        //     as: "user",
-        //     attributes: {
-        //       exclude: ["createdAt", "updatedAt", "password", "deletedAt"],
-        //     },
-        //   },
       ],
       attributes: {
         exclude: ["createdAt", "updatedAt", "deletedAt"],
       },
     });
 
-    if (todos.length < 1) {
-      throw new Error("todos is empty");
-    }
-
     res.status(status.OK).send(todos);
-  } catch (err) {
-    res.status(500).send({
-      message: err.message,
+  } catch (error) {
+    console.log(error);
+    res.send({
+      status: "failed",
+      message: "Server Error",
     });
   }
 };

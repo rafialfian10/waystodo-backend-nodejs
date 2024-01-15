@@ -1,5 +1,4 @@
 "use strict";
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,6 +8,16 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        field: "user_id",
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       categoryName: {
         type: Sequelize.STRING,
@@ -20,24 +29,20 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        defaultValue: Sequelize.DATE,
         type: Sequelize.DATE,
         field: "created_at",
       },
       updatedAt: {
         allowNull: false,
-        defaultValue: Sequelize.DATE,
         type: Sequelize.DATE,
         field: "updated_at",
       },
       deletedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
         field: "deleted_at",
       },
     });
   },
-
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable("categories");
   },

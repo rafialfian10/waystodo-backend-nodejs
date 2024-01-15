@@ -1,5 +1,4 @@
 "use strict";
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -10,14 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      // userId: {
-      //   type: Sequelize.INTEGER,
-      //   field: "user_id",
-      //   references: {
-      //     model: "users",
-      //     key: "id",
-      //   },
-      // },
+      userId: {
+        type: Sequelize.INTEGER,
+        field: "user_id",
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
       categoryId: {
         type: Sequelize.INTEGER,
         field: "category_id",
@@ -25,6 +26,8 @@ module.exports = {
           model: "categories",
           key: "id",
         },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
       },
       title: {
         type: Sequelize.STRING,

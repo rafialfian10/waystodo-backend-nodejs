@@ -1,4 +1,5 @@
 "use strict";
+
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Todo extends Model {
@@ -9,10 +10,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    //   Todo.belongsTo(models.User, {
-    //     foreignKey: "userId",
-    //     as: "user", // untuk object key ketika mempreload user di data todo
-    //   });
       Todo.belongsTo(models.Category, {
         foreignKey: "categoryId",
         as: "category",
@@ -31,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
       },
       isDone: {
         type: DataTypes.BOOLEAN,
