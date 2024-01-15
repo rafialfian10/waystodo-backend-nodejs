@@ -121,7 +121,13 @@ exports.getUsers = async (req, res) => {
       ],
     });
 
-    res.status(status.OK).json(users);
+    let dataUsers = JSON.parse(JSON.stringify(users));
+
+    dataUsers = dataUsers.map((dataUser) => {
+      return { ...dataUser, photo: process.env.PATH_FILE_PHOTO + dataUser.photo };
+    });
+
+    res.status(status.OK).json(dataUsers);
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -167,7 +173,14 @@ exports.getUser = async (req, res) => {
       ],
     });
 
-    res.status(status.OK).json(user);
+    let dataUser = JSON.parse(JSON.stringify(user));
+
+    dataUser = {
+      ...dataUser,
+      photo: process.env.PATH_FILE_PHOTO + dataUser.photo,
+    };
+
+    res.status(status.OK).json(dataUser);
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -197,8 +210,8 @@ exports.updateUser = async (req, res) => {
       user.phone = req.body.phone;
     }
 
-    if (req.body.photo) {
-      user.photo = req.body.photo;
+    if (req.file) {
+      user.photo = req.file.filename;
     }
 
     user = await user.save();

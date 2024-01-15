@@ -1,7 +1,9 @@
+require("dotenv").config(); // read environment variable from .env file
+
 const express = require("express");
 const morgan = require("morgan");
-
-require("dotenv").config(); // read environment variable from .env file
+const cors = require("cors");
+// -----------------------------------------
 
 // create instance of express
 const app = express();
@@ -12,16 +14,15 @@ app.use(logger);
 
 // incoming request parser
 app.use(express.json());
+app.use(cors());
 
-// get port from environment variable, if not exist then use default port 5000
 const port = process.env.PORT || 5000;
 
-// get router
 const router = require("./src/routes");
-// create router group
-app.use("/api/v1/", router);
 
-// run server
+app.use("/api/v1/", router);
+app.use('/uploads', express.static('uploads'));
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
