@@ -16,9 +16,8 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
       },
-      isEmailVerified: {
-        type: Sequelize.BOOLEAN,
-        field: "is_email_verified",
+      password: {
+        type: Sequelize.STRING,
       },
       phone: {
         type: Sequelize.STRING,
@@ -26,8 +25,9 @@ module.exports = {
       photo: {
         type: Sequelize.STRING,
       },
-      password: {
-        type: Sequelize.STRING,
+      isEmailVerified: {
+        type: Sequelize.BOOLEAN,
+        field: "is_email_verified",
       },
       createdAt: {
         allowNull: false,
