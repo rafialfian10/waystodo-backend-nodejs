@@ -15,31 +15,35 @@ exports.register = async (req, res) => {
     });
 
     if (isUserRegistered) {
-      throw new Error("email already registered");
+      res.status(status.BAD_REQUEST).json({
+        message: "Email already registered",
+        status: status.BAD_REQUEST,
+      });
+    } else {
+      // hashing password on controller
+      // let hashedPassword = await bcrypt.hash(password, 10);
+      // if (typeof hashedPassword !== "string") {
+      //   throw new Error("Error while hashing password");
+      // }
+
+      const user = await User.create({
+        userName: user_name,
+        email: email,
+        password: password,
+        phone: phone,
+      });
+
+      res.status(status.CREATED).json({
+        message: "register successfully",
+        status: status.OK,
+        data: {
+          id: user.id,
+          userName: user.userName,
+          email: user.email,
+          phone: user.phone,
+        },
+      });
     }
-
-    // hashing password on controller
-    // let hashedPassword = await bcrypt.hash(password, 10);
-    // if (typeof hashedPassword !== "string") {
-    //   throw new Error("Error while hashing password");
-    // }
-
-    const user = await User.create({
-      userName: user_name,
-      email: email,
-      password: password,
-      phone: phone,
-    });
-
-    res.status(status.CREATED).json({
-      message: "user registered successfully",
-      data: {
-        id: user.id,
-        userName: user.userName,
-        email: user.email,
-        phone: user.phone,
-      },
-    });
   } catch (err) {
     res.status(status.INTERNAL_SERVER_ERROR).json({
       message: err.message,
@@ -77,12 +81,16 @@ exports.login = async (req, res) => {
     );
 
     res.status(status.OK).json({
-      id: user.id,
-      userName: user.userName,
-      email: user.email,
-      isEmailVerified: user.isEmailVerified,
-      photo: user.photo,
-      token,
+      message: "login successfully",
+      status: status.OK,
+      data: {
+        id: user.id,
+        userName: user.userName,
+        email: user.email,
+        isEmailVerified: user.isEmailVerified,
+        photo: user.photo,
+        token,
+      },
     });
   } catch (err) {
     console.log(err);
@@ -108,7 +116,9 @@ exports.checkAuth = async (req, res) => {
         status: "failed",
       });
     }
+
     res.status(status.OK).json({
+      status: status.OK,
       data: {
         id: userCheckAuth.id,
         userName: userCheckAuth.userName,

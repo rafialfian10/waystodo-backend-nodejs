@@ -18,7 +18,10 @@ exports.getCategories = async (req, res) => {
       },
     });
 
-    res.status(status.OK).json(categories);
+    res.status(status.OK).json({
+      status: status.OK,
+      data: categories,
+    });
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -50,7 +53,10 @@ exports.getCategory = async (req, res) => {
       },
     });
 
-    res.status(status.OK).json(category);
+    res.status(status.OK).json({
+      status: status.OK,
+      data: category,
+    });
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -84,7 +90,10 @@ exports.createCategory = async (req, res) => {
       },
     });
 
-    res.status(status.CREATED).json(category);
+    res.status(status.CREATED).json({
+      status: status.CREATED,
+      data: category,
+    });
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -132,7 +141,8 @@ exports.updateCategory = async (req, res) => {
     }
 
     res.status(status.OK).json({
-      category,
+      status: status.OK,
+      data: category,
     });
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });

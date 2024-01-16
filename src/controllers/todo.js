@@ -34,13 +34,12 @@ exports.getTodos = async (req, res) => {
       ],
     });
 
-    res.status(status.OK).send(todos);
-  } catch (error) {
-    console.log(error);
-    res.send({
-      status: "failed",
-      message: "Server Error",
+    res.status(status.OK).json({
+      status: status.OK,
+      data: todos,
     });
+  } catch (error) {
+    res.status(status.BAD_REQUEST).json({ message: error.message });
   }
 };
 
@@ -84,11 +83,12 @@ exports.getTodo = async (req, res) => {
       ],
     });
 
-    res.status(status.OK).send(todo);
-  } catch (err) {
-    res.status(500).send({
-      message: err.message,
+    res.status(status.OK).json({
+      status: status.OK,
+      data: todo,
     });
+  } catch (err) {
+    res.status(status.INTERNAL_SERVER_ERROR).json({ message: error.message });
   }
 };
 
@@ -152,7 +152,10 @@ exports.createTodo = async (req, res) => {
       ],
     });
 
-    res.status(status.CREATED).json(todo);
+    res.status(status.CREATED).json({
+      status: status.CREATED,
+      data: todo,
+    });
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -228,7 +231,10 @@ exports.updateTodo = async (req, res) => {
       ],
     });
 
-    res.status(status.OK).send(todo);
+    res.status(status.OK).json({
+      status: status.OK,
+      data: todo,
+    });
   } catch (err) {
     res.status(500).send({
       message: err.message,

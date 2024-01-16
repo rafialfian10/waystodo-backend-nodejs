@@ -36,10 +36,16 @@ exports.getUsers = async (req, res) => {
     let dataUsers = JSON.parse(JSON.stringify(users));
 
     dataUsers = dataUsers.map((dataUser) => {
-      return { ...dataUser, photo: process.env.PATH_FILE_PHOTO + dataUser.photo };
+      return {
+        ...dataUser,
+        photo: process.env.PATH_FILE_PHOTO + dataUser.photo,
+      };
     });
 
-    res.status(status.OK).json(dataUsers);
+    res.status(status.OK).json({
+      status: status.OK,
+      data: dataUsers,
+    });
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -92,7 +98,10 @@ exports.getUser = async (req, res) => {
       photo: process.env.PATH_FILE_PHOTO + dataUser.photo,
     };
 
-    res.status(status.OK).json(dataUser);
+    res.status(status.OK).json({
+      status: status.OK,
+      data: dataUser,
+    });
   } catch (err) {
     res.status(status.BAD_REQUEST).json({ message: err.message });
   }
@@ -137,7 +146,10 @@ exports.updateUser = async (req, res) => {
       },
     });
 
-    res.status(status.OK).send(user);
+    res.status(status.OK).json({
+      status: status.OK,
+      data: user,
+    });
   } catch (err) {
     res.status(500).send({
       message: err.message,
