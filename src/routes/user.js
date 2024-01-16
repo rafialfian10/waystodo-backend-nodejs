@@ -1,6 +1,4 @@
 const {
-  register,
-  login,
   getUsers,
   getUser,
   updateUser,
@@ -10,8 +8,6 @@ const { userAuth } = require("../middleware/userAuth");
 const { uploadFile } = require("../middleware/uploadFile")
 
 const user = (router) => {
-  router.post("/register", register);
-  router.post("/login", login);
   router.get("/users", userAuth, getUsers);
   router.get("/user/:id", userAuth, getUser);
   router.patch("/user/:id", userAuth, uploadFile("photo"), updateUser);

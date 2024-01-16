@@ -26,3 +26,23 @@ exports.userAuth = async (req, res, next) => {
     });
   }
 };
+
+// exports.userAuth = (req, res, next) => {
+//   const authHeader = req.header("Authorization");
+//   const token = authHeader && authHeader.split(" ")[1];
+//   // check if user send token via Authorization header or not
+//   if (!token) {
+//     // rejected request and send response access denied
+//     return res.status(401).send({ message: "Access denied!" });
+//   }
+
+//   try {
+//     const verified = jwt.verify(token, process.env.SECRET_KEY); //verified token
+//     req.user = verified;
+//     next(); // if token valid go to the next request
+//   } catch (error) {
+//     res.status(status.UNAUTHORIZED).json({
+//       message: err.message,
+//     });
+//   }
+// };
