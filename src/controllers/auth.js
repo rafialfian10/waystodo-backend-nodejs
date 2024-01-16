@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
 
     res.status(status.CREATED).json({
       message: "user registered successfully",
-      user: {
+      data: {
         id: user.id,
         userName: user.userName,
         email: user.email,
@@ -41,7 +41,6 @@ exports.register = async (req, res) => {
       },
     });
   } catch (err) {
-    console.log(err);
     res.status(status.INTERNAL_SERVER_ERROR).json({
       message: err.message,
     });
