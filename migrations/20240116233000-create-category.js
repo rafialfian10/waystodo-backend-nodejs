@@ -9,16 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      // userId: {
-      //   type: Sequelize.INTEGER,
-      //   field: "user_id",
-      //   references: {
-      //     model: "users",
-      //     key: "id",
-      //   },
-      //   onUpdate: "CASCADE",
-      //   onDelete: "CASCADE",
-      // },
+      userId: {
+        type: Sequelize.INTEGER,
+        field: "user_id",
+        references: {
+          model: "users",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "CASCADE",
+      },
       categoryName: {
         type: Sequelize.STRING,
         field: "category_name",

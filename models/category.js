@@ -8,11 +8,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // // define association here
-      // Category.belongsTo(models.User, {
-      //   foreignKey: "userId",
-      //   as: "user", // untuk object key ketika mempreload user di data category
-      // });
+      // define association here
+      Category.belongsTo(models.User, {
+        foreignKey: "userId",
+        as: "user", // untuk object key ketika mempreload user di data category
+      });
       // Category.hasMany(models.Todo, {
       //   foreignKey: "categoryId",
       //   as: {
@@ -25,6 +25,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Category.init(
     {
+      userId: {
+        type: DataTypes.INTEGER,
+      },
       categoryName: {
         type: DataTypes.STRING,
       },

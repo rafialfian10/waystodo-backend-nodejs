@@ -14,7 +14,7 @@ exports.getCategories = async (req, res) => {
 
     const categories = await Category.findAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "userId"],
       },
     });
 
@@ -49,7 +49,7 @@ exports.getCategory = async (req, res) => {
         id,
       },
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "userId"],
       },
     });
 
@@ -66,6 +66,7 @@ exports.createCategory = async (req, res) => {
   try {
     // create validator
     const schema = joi.object({
+      user_id: joi.number().required(),
       category_name: joi.string().required(),
       bg_color: joi.string().required(),
     });
@@ -77,6 +78,7 @@ exports.createCategory = async (req, res) => {
     }
 
     let category = await Category.create({
+      userId: req.body.user_id,
       categoryName: req.body.category_name,
       bgColor: req.body.bg_color,
     });
@@ -86,7 +88,7 @@ exports.createCategory = async (req, res) => {
         id: category.id,
       },
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "userId"],
       },
     });
 
@@ -132,7 +134,7 @@ exports.updateCategory = async (req, res) => {
         id: req.params.id,
       },
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "userId"],
       },
     });
 

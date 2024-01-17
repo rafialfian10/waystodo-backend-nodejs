@@ -22,14 +22,16 @@ exports.getUsers = async (req, res) => {
               "categoryId",
             ],
           },
+          include: [
+            {
+              model: Category,
+              as: "category",
+              attributes: {
+                exclude: ["createdAt", "updatedAt", "deletedAt", "userId"],
+              },
+            },
+          ],
         },
-        // {
-        //   model: Category,
-        //   as: "categories",
-        //   attributes: {
-        //     exclude: ["createdAt", "updatedAt", "password", "deletedAt"],
-        //   },
-        // },
       ],
     });
 
@@ -80,14 +82,16 @@ exports.getUser = async (req, res) => {
               "categoryId",
             ],
           },
+          include: [
+            {
+              model: Category,
+              as: "category",
+              attributes: {
+                exclude: ["createdAt", "updatedAt", "deletedAt", "userId"],
+              },
+            },
+          ],
         },
-        // {
-        //   model: Category,
-        //   as: "categories",
-        //   attributes: {
-        //     exclude: ["createdAt", "updatedAt", "password", "deletedAt"],
-        //   },
-        // },
       ],
     });
 
