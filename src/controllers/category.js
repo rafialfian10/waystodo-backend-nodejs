@@ -2,8 +2,35 @@ const status = require("http-status");
 const joi = require("joi");
 const db = require("../database/connection");
 
-const { Category } = require("../../models");
+const { Category, User } = require("../../models");
 // ----------------------------------------------
+
+exports.getCategoriesByUser = async (req, res) => {
+  try {
+    const userId =  req.userData.id;
+
+    const categories = await Category.findAll({
+      where: { userId: userId },
+      attributes: {
+        exclude: ["createdAt", "updatedAt", "deletedAt"],
+      },
+      include: {
+        model: User,
+        as: "user",
+        attributes: {
+          exclude: ["createdAt", "updatedAt", "deletedAt", "password"],
+        },
+      },
+    });
+
+    res.status(status.OK).json({
+      status: status.OK,
+      data: categories,
+    });
+  } catch (err) {
+    res.status(status.BAD_REQUEST).json({ message: err.message });
+  }
+};
 
 exports.getCategories = async (req, res) => {
   try {

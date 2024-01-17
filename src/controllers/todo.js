@@ -4,6 +4,54 @@ const joi = require("joi");
 const { User, Todo, Category } = require("../../models");
 // ------------------------------------------------
 
+exports.getTodosByUser = async (req, res) => {
+  try {
+    const todos = await Todo.findAll({
+      where: {
+        userId: req.userData.id,
+      },
+      attributes: {
+        exclude: [
+          "createdAt",
+          "updatedAt",
+          "deletedAt",
+          "userId",
+          "categoryId",
+        ],
+      },
+      include: [
+        {
+          model: Category,
+          as: "category",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "deletedAt"],
+          },
+        },
+        {
+          model: User,
+          as: "user",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "deletedAt", "password"],
+          },
+        },
+      ],
+    });
+
+    if (todos.length < 1) {
+      throw new Error("todos is empty");
+    }
+
+    res.status(status.OK).json({
+      status: status.OK,
+      data: todos,
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: err.message,
+    });
+  }
+};
+
 exports.getTodos = async (req, res) => {
   try {
     const todos = await Todo.findAll({

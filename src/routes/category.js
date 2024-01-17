@@ -1,4 +1,5 @@
 const {
+  getCategoriesByUser,
   getCategories,
   getCategory,
   createCategory,
@@ -8,6 +9,7 @@ const {
 const { userAuth } = require("../middleware/userAuth");
 
 const category = (router) => {
+  router.get("/categories-user", userAuth, getCategoriesByUser);
   router.get("/categories", userAuth, getCategories);
   router.get("/category/:id", userAuth, getCategory);
   router.post("/category", userAuth, createCategory);
