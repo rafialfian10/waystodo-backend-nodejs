@@ -131,7 +131,11 @@ exports.updateUser = async (req, res) => {
       user.email = req.body.email;
     }
 
-    if (req.body.phone) {
+    if (
+      req.body.phone !== undefined &&
+      req.body.phone !== null &&
+      req.body.phone !== ""
+    ) {
       user.phone = req.body.phone;
     }
 
