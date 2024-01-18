@@ -63,12 +63,19 @@ exports.login = async (req, res) => {
     });
 
     if (!user) {
-      throw new Error("email not registered");
+      return res.status(status.BAD_REQUEST).json({
+        message: "email not registered",
+        status: status.BAD_REQUEST,
+      });
     }
 
     const checkPassword = await bcrypt.compare(password, user.password);
     if (!checkPassword) {
-      throw new Error("password you entered is incorrect");
+      return res.status(status.BAD_REQUEST).json({
+        message: "password you entered is incorrect",
+        status: status.BAD_REQUEST,
+        errorType: "incorrect_password",
+      });
     }
 
     const token = jwt.sign(
