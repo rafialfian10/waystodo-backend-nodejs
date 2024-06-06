@@ -35,9 +35,6 @@ app.listen(port, () => {
 3. npm install mysql2
 4. npx sequelize init -> create config.json in folder config & index.js in folder models 
 5. npx sequelize-cli migration:generate --name apa_saja -> edit new file in migrations
-6. npx sequelize db:migrate
-
-// how to view username & password mysql: xampp -> phpmyadmin -> config.inc.php
-// how to view port in mysql: SQL -> create SHOW VARIABLES WHERE Variable_name = 'port';
-
+6. npx sequelize-cli seed:generate --name apa_saja -> edit new file in seeders
+7. npx sequelize db:migrate
 */

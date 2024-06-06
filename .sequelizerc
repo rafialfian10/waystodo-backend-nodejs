@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  config: path.resolve("config", "config.json"), // Sesuaikan dengan lokasi file konfigurasi database Anda
+  config: path.resolve("config", "config.js"), // Sesuaikan dengan lokasi file konfigurasi database Anda
   "models-path": path.resolve("models"), // Sesuaikan dengan lokasi model Sequelize Anda
   "seeders-path": path.resolve("seeders"), // Sesuaikan dengan lokasi seeders Sequelize Anda
   "migrations-path": path.resolve("migrations"), // Sesuaikan dengan lokasi migrations Sequelize Anda
